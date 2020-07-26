@@ -1,0 +1,26 @@
+Voici un component react qu'on peut utiliser pour s'authentification et créer un compte.
+on utilise nodeJS comme serveur avec une base de donnée mysql.
+
+le nom de la base de donnée est 'nodejs' et le nom de la table est 'authentification' qui contient 3 colonnes (id clé primaire auto incrément, email et password)
+vous pouvez au besoin changer le nom de la bdd et de la table dans le fichier database.js
+supprimer la ligne 'port' ou changer la valeur par 3306 si vous utilisez le port standard.
+
+pour vérifier si on est connecté ou non, on questionne le serveur par une requête GET à l'adresse localhost:8000/admin
+si la réponse est "no" nous ne sommes pas connecté, si oui, on recoit l'adresse email de l'utilisateur.
+Voici une fonction qu'on peut implémenter coté front:
+
+function test(){
+    axios({
+	method: "GET", 
+	url:"http://localhost:8000/admin"
+    }).then((response)=>{
+        if(response.data === 'no')
+            alert("vous n'êtes pas connecté");
+        else
+            alert('bienvenue ' + response.data);
+    });
+};
+
+
+pour se déconnecter, on enverra de la même manière une requête GET au serveur sur la route localhost:8000/logout
+
